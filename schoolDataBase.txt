@@ -1,0 +1,48 @@
+create database school;
+use school;
+
+CREATE TABLE students (
+  student_id INT PRIMARY KEY,
+  name VARCHAR(50),
+  age INT,
+  department VARCHAR(20),
+  marks INT
+);
+
+INSERT INTO students VALUES
+(1,'Arjun',20,'CSE',85),
+(2,'Priya',19,'IT',78),
+(3,'Karthik',21,'ECE',92),
+(4,'Sneha',20,'CSE',67),
+(5,'Mohammed',22,'Mech',74);
+
+select * from students;
+select * from students where marks > 80;
+select * from students order by marks desc;
+select department,count(*) as total_students from students group by department;
+update students set marks=75 where name='Sneha';
+
+CREATE TABLE employees (
+  emp_id INT PRIMARY KEY,
+  name VARCHAR(50),
+  department VARCHAR(20),
+  salary INT,
+  city VARCHAR(30)
+);
+
+
+INSERT INTO employees VALUES
+(1,'Arjun','HR',35000,'Chennai'),
+(2,'Priya','IT',55000,'Bangalore'),
+(3,'Manoj','Finance',42000,'Chennai'),
+(4,'Sneha','IT',60000,'Hyderabad'),
+(5,'Karan','HR',38000,'Mumbai'),
+(6,'Divya','IT',45000,'Chennai');
+
+select * from employees;
+
+select * from employees where salary between 40000 and 60000;
+select * from employees order by salary desc limit 1;
+select city, count(city) as no_city from employees group by city having count(city) > 1;
+update employees set salary = salary+salary*0.10 where department = 'HR';
+select * from employees where name like '%a';
