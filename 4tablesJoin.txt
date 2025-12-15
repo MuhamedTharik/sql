@@ -1,0 +1,59 @@
+create database school; -- created the database called school 
+use school; -- choosing the database 
+
+-- creating tables
+
+CREATE TABLE students (
+    student_id INT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    class VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE teachers (
+    teacher_id INT PRIMARY KEY,
+    teacher_name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE subjects (
+    subject_id INT PRIMARY KEY,
+    subject_name VARCHAR(50) NOT NULL,
+    teacher_id INT,
+    FOREIGN KEY (teacher_id) REFERENCES teachers(teacher_id)
+);
+
+CREATE TABLE marks (
+    mark_id INT PRIMARY KEY,
+    student_id INT,
+    subject_id INT,
+    score INT,
+    FOREIGN KEY (student_id) REFERENCES students(student_id),
+    FOREIGN KEY (subject_id) REFERENCES subjects(subject_id)
+);
+
+-- inserting the values to the database
+
+INSERT INTO students (student_id, name, class) VALUES
+(1, 'Rahul', 'CS'),
+(2, 'Anita', 'IT');
+
+INSERT INTO teachers (teacher_id, teacher_name) VALUES
+(1001, 'Mr. Kumar'),
+(1002, 'Ms. Priya');
+
+INSERT INTO subjects (subject_id, subject_name, teacher_id) VALUES
+(101, 'Maths', 1001),
+(102, 'Physics', 1002);
+
+INSERT INTO marks (mark_id, student_id, subject_id, score) VALUES
+(1, 1, 101, 85),
+(2, 2, 102, 90);
+
+select s.name,s.class,su.subject_name,m.score,t.teacher_name
+from students s 
+join marks m on s.student_id = m.student_id
+join subjects su on m.subject_id = su.subject_id
+join teachers t on su.teacher_id = t.teacher_id;
+
+
+
+
